@@ -26,7 +26,7 @@ defmodule PayPal.Mixfile do
 
   defp deps do
     [
-      {:httpoison, "~> 0.13"},
+      {:httpoison, "~> 2.0"},
       {:poison, "~> 5.0"},
       {:oauth2, "~> 0.9"},
       {:exvcr, "~> 0.8", only: [:dev, :test]},
