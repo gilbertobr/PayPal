@@ -64,7 +64,7 @@ defmodule PayPal.API do
   """
   @spec get(String.t) :: {:ok, map | :not_found | :no_content } | {:error, :unauthorised | :bad_network | any}
   def get(url) do
-    case HTTPoison.get(base_url() <> "v1/" <> url, headers()) do
+    case HTTPoison.get(base_url() <> url, headers()) do
       {:ok, %{status_code: 401}} ->
         {:error, :unauthorised}
       {:ok, %{body: body, status_code: 200}} ->
