@@ -104,7 +104,7 @@ defmodule PayPal.API do
   @spec post(String.t, map | list | nil) :: {:ok, map | :not_found | :no_content | nil} | {:error, :unauthorised | :bad_network | any}
   def post(url, data) do
     {:ok, data} = Poison.encode(data)
-    case IO.inspect(HTTPoison.post(base_url() <> url, data, headers())) do
+    case HTTPoison.post(base_url() <> url, data, headers()) do
       {:ok, %{status_code: 401}} ->
         {:error, :unauthorised}
       {:ok, %{body: body, status_code: 200}} ->
