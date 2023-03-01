@@ -170,7 +170,7 @@ defmodule PayPal.API do
 
   @spec headers :: map
   defp headers do
-    %{"Authorization" => "Bearer #{Application.get_env(:pay_pal, :access_token)}", "Content-Type" => "application/json"}
+    %{"Authorization" => "Bearer #{Application.get_env(:pay_pal, :access_token)}", "Content-Type" => "application/json", "PayPal-Request-Id" => "#{Integer.to_string(:rand.uniform(999999999999999), 32)}"}
   end
 
   @spec base_url :: String.t
