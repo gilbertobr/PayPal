@@ -29,9 +29,11 @@ defmodule PayPal.API do
     options = [hackney: [basic_auth: {PayPal.Config.get.client_id, PayPal.Config.get.client_secret}]]
     form = {:form, [grant_type: "client_credentials"]}
 
-    case HTTPoison.post(base_url() <> "oauth2/token", form, headers, options) do
+    case IO.inspect(HTTPoison.post(base_url() <> "oauth2/token", form, headers, options)) do
       {:ok, %{status_code: 401}} ->
         {:error, :unauthorised}
+      {:ok, %{status_code: 406}} ->
+        {:error, :not_acceptable}
       {:ok, %{body: body, status_code: 200}} ->
         %{access_token: access_token, expires_in: expires_in} = Poison.decode!(body, keys: :atoms)
         {:ok, {access_token, expires_in}}
