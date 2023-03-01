@@ -1,4 +1,4 @@
-defmodule PayPal.Payments.Authorizations do
+defmodule PayPal.PaymentsV1.Authorizations do
   @moduledoc """
   Documentation for PayPal.Payments.Authorizations
 

@@ -1,6 +1,6 @@
-defmodule PayPal.Payments.Sales do
+defmodule PayPal.PaymentsV1.Sales do
   @moduledoc """
-  Documentation for PayPal.Payments.Sales
+  Documentation for PayPal.PaymentsV1.Sales
 
   A sale is a completed payment.
 
@@ -19,7 +19,7 @@ defmodule PayPal.Payments.Sales do
 
   ## Examples
 
-    iex> PayPal.Payments.Sales.show(sale_id)
+    iex> PayPal.PaymentsV1.Sales.show(sale_id)
     {:ok, payment}
   """
   @spec show(String.t) :: {:ok, map | :not_found | :no_content } | {:error, :unauthorised | :bad_network | any}
@@ -39,7 +39,7 @@ defmodule PayPal.Payments.Sales do
 
   ## Examples
 
-    iex> PayPal.Payments.Sales.refund(sale_id, %{
+    iex> PayPal.PaymentsV1.Sales.refund(sale_id, %{
       amount: %{
         total: "1.50",
         currency: "USD"

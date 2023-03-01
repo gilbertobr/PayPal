@@ -1,4 +1,4 @@
-defmodule PayPal.Payments.Orders do
+defmodule PayPal.PaymentsV1.Orders do
   @moduledoc """
   Documentation for PayPal.Payments.Orders
 

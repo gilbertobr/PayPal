@@ -2,8 +2,9 @@ defmodule PayPal.API do
   @moduledoc """
   Documentation for PayPal.API. This module is about the base HTTP functionality
   """
-  @base_url_sandbox "https://api.sandbox.paypal.com/v1/"
-  @base_url_live "https://api.paypal.com/v1/"
+  @version Application.get_env(:pay_pal, :version_api)
+  @base_url_sandbox "https://api.sandbox.paypal.com/#{@version}/"
+  @base_url_live "https://api.paypal.com/#{@version}/"
 
   @doc """
   Requests an OAuth token from PayPal, returns a tuple containing the token and seconds till expiry.

@@ -1,4 +1,4 @@
-defmodule PayPal.Payments.Captures do
+defmodule PayPal.PaymentsV1.Captures do
   @moduledoc """
   Documentation for PayPal.Payments.Captures
 

@@ -1,6 +1,6 @@
-defmodule PayPal.Payments.Payouts do
+defmodule PayPal.PaymentsV1.Payouts do
   @moduledoc """
-  Documentation for PayPal.Payouts.Payouts
+  Documentation for PayPal.PayoutsV1.Payouts
 
   https://developer.paypal.com/docs/api/payments.payouts-batch/v1/#payouts
   """

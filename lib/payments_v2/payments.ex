@@ -1,6 +1,6 @@
-defmodule PayPal.Payments.Payments do
+defmodule PayPal.PaymentsV2.Payments do
   @moduledoc """
-  Documentation for PayPal.Payments.Payments
+  Documentation for PayPal.PaymentsV2.Payments
   """
 
   @doc """
@@ -17,7 +17,7 @@ defmodule PayPal.Payments.Payments do
 
   ## Examples
 
-    iex> PayPal.Payments.Payments.create(%{
+    iex> PayPal.PaymentsV2.Payments.create(%{
       intent: "sale",
       payer: %{
         payment_method: "paypal"
@@ -160,10 +160,10 @@ defmodule PayPal.Payments.Payments do
     }}
 
   """
-  @spec create(map) :: {:ok, map | :not_found | :no_content | nil} | {:error, :unauthorised | :bad_network | any}
-  def create(payment) do
-    PayPal.API.post("payments/payment", payment)
-  end
+  # @spec create(map) :: {:ok, map | :not_found | :no_content | nil} | {:error, :unauthorised | :bad_network | any}
+  # def create(payment) do
+  #   PayPal.API.post("payments/payment", payment)
+  # end
 
   @doc """
   Execute an approved PayPal payment
@@ -177,13 +177,13 @@ defmodule PayPal.Payments.Payments do
 
   ## Examples
 
-    iex> PayPal.Payments.Payments.execute(payment_id, payer_id)
+    iex> PayPal.PaymentsV2.Payments.execute(payment_id, payer_id)
     {:ok, payment}
   """
-  @spec execute(String.t, String.t) :: {:ok, map | :not_found | :no_content | nil} | {:error, :unauthorised | :bad_network | any}
-  def execute(payment_id, payer_id) do
-    PayPal.API.post("payments/payment/#{payment_id}/execute", %{payer_id: payer_id})
-  end
+  # @spec execute(String.t, String.t) :: {:ok, map | :not_found | :no_content | nil} | {:error, :unauthorised | :bad_network | any}
+  # def execute(payment_id, payer_id) do
+  #   PayPal.API.post("payments/payment/#{payment_id}/execute", %{payer_id: payer_id})
+  # end
 
   @doc """
   Show a payment
@@ -197,13 +197,13 @@ defmodule PayPal.Payments.Payments do
 
   ## Examples
 
-    iex> PayPal.Payments.Payments.show(payment_id)
+    iex> PayPal.PaymentsV2.Payments.show(payment_id)
     {:ok, payment}
   """
-  @spec show(String.t) :: {:ok, map | :not_found | :no_content } | {:error, :unauthorised | :bad_network | any}
-  def show(payment_id) do
-    PayPal.API.get("payments/payment/#{payment_id}")
-  end
+  # @spec show(String.t) :: {:ok, map | :not_found | :no_content } | {:error, :unauthorised | :bad_network | any}
+  # def show(payment_id) do
+  #   PayPal.API.get("payments/payment/#{payment_id}")
+  # end
 
   @doc """
   Update a payment
@@ -221,7 +221,7 @@ defmodule PayPal.Payments.Payments do
 
   ## Examples
 
-    iex> PayPal.Payments.Payments.update(payment_id, [%{
+    iex> PayPal.PaymentsV2.Payments.update(payment_id, [%{
       op: "replace",
       path: "/transactions/0/amount",
       value: %{
@@ -247,10 +247,10 @@ defmodule PayPal.Payments.Payments do
     {:ok, payment}
 
   """
-  @spec update(String.t, list) :: {:ok, map | nil | :not_found | :no_content} | {:error, :unauthorised | :bad_network | any}
-  def update(payment_id, changes) do
-    PayPal.API.patch("payments/payment/#{payment_id}", changes)
-  end
+  # @spec update(String.t, list) :: {:ok, map | nil | :not_found | :no_content} | {:error, :unauthorised | :bad_network | any}
+  # def update(payment_id, changes) do
+  #   PayPal.API.patch("payments/payment/#{payment_id}", changes)
+  # end
 
   @doc """
   Get a list of all payments
@@ -264,16 +264,16 @@ defmodule PayPal.Payments.Payments do
 
   ## Examples
 
-    iex> PayPal.Payments.Payments.show(%{count: 10})
+    iex> PayPal.PaymentsV2.Payments.show(%{count: 10})
     {:ok, payment}
   """
-  @spec list(map) :: {:ok, map | :not_found | :no_content } | {:error, :unauthorised | :bad_network | any}
-  def list(query \\ %{}) do
-    case PayPal.API.get("payments/payment?#{URI.encode_query(query)}") do
-      {:ok, %{payments: payments}} ->
-        {:ok, payments}
-      error ->
-        error
-    end
-  end
+  # @spec list(map) :: {:ok, map | :not_found | :no_content } | {:error, :unauthorised | :bad_network | any}
+  # def list(query \\ %{}) do
+  #   case PayPal.API.get("payments/payment?#{URI.encode_query(query)}") do
+  #     {:ok, %{payments: payments}} ->
+  #       {:ok, payments}
+  #     error ->
+  #       error
+  #   end
+  # end
 end

@@ -1,6 +1,6 @@
-defmodule PayPal.Payments.Refunds do
+defmodule PayPal.PaymentsV1.Refunds do
   @moduledoc """
-  Documentation for PayPal.Payments.Refunds
+  Documentation for PayPal.PaymentsV1.Refunds
 
   https://developer.paypal.com/docs/api/payments/#refund
   """
@@ -17,7 +17,7 @@ defmodule PayPal.Payments.Refunds do
 
   ## Examples
 
-    iex> PayPal.Payments.Refunds.show(refund_id)
+    iex> PayPal.PaymentsV1.Refunds.show(refund_id)
     {:ok, refund}
   """
   @spec show(String.t) :: {:ok, map | :not_found | :no_content } | {:error, :unauthorised | :bad_network | any}
