@@ -28,7 +28,7 @@ defmodule PayPal.API do
     options = [hackney: [basic_auth: {PayPal.Config.get.client_id, PayPal.Config.get.client_secret}]]
     form = {:form, [grant_type: "client_credentials"]}
 
-    case IO.inspect(HTTPoison.post(base_url() <> "v1/" <> "oauth2/token", form, headers, options)) do
+    case HTTPoison.post(base_url() <> "v1/" <> "oauth2/token", form, headers, options) do
       {:ok, %{status_code: 401}} ->
         {:error, :unauthorised}
       {:ok, %{status_code: 404}} ->
@@ -104,7 +104,7 @@ defmodule PayPal.API do
   @spec post(String.t, map | list | nil) :: {:ok, map | :not_found | :no_content | nil} | {:error, :unauthorised | :bad_network | any}
   def post(url, data) do
     {:ok, data} = Poison.encode(data)
-    case HTTPoison.post(base_url() <> url, data, headers()) do
+    case IO.inspect(HTTPoison.post(base_url() <> url, data, headers())) do
       {:ok, %{status_code: 401}} ->
         {:error, :unauthorised}
       {:ok, %{body: body, status_code: 200}} ->
