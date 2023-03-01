@@ -45,7 +45,7 @@ defmodule PayPal.PaymentsV2.Orders do
       }
     }
   }
-})
+  })
     {:ok, %{
   "id": "5O190127TN364715T",
   "status": "PAYER_ACTION_REQUIRED",
@@ -64,7 +64,7 @@ defmodule PayPal.PaymentsV2.Orders do
       "method": "GET"
     }
   ]
-}}
+  }}
 
   """  
   @spec create(map) :: {:ok, map | :not_found | :no_content | nil} | {:error, :unauthorised | :bad_network | any}

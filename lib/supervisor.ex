@@ -16,7 +16,7 @@ defmodule PayPal.Application do
     Supervisor.start_link(children, opts)
   end
 
-  defp refresh_token(seconds \\ 1000) do
+  defp refresh_token(_seconds \\ 1000) do
     case PayPal.API.get_oauth_token() do
       {:ok, {token, seconds}} ->
         Application.put_env(:pay_pal, :access_token, token)
