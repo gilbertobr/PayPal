@@ -22,9 +22,8 @@ defmodule PayPal.Config do
 
   config :pay_pal,
     client_id: "CLIENT_ID",
-    client_secret: "CLIENT_SECRET"
+    client_secret: "CLIENT_SECRET",
     environment: :sandbox
-    version_api: "v1"
 
   ## Examples
 

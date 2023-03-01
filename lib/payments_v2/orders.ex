@@ -69,7 +69,7 @@ defmodule PayPal.PaymentsV2.Orders do
   """  
   @spec create(map) :: {:ok, map | :not_found | :no_content | nil} | {:error, :unauthorised | :bad_network | any}
   def create(order) do
-    PayPal.API.post("checkout/orders", order)
+    PayPal.API.post("v2/checkout/orders", order)
   end
 
   @doc """
@@ -89,7 +89,7 @@ defmodule PayPal.PaymentsV2.Orders do
   """
   @spec show(String.t) :: {:ok, map | :not_found | :no_content } | {:error, :unauthorised | :bad_network | any}
   def show(order_id) do
-    PayPal.API.get("checkout/orders/#{order_id}")
+    PayPal.API.get("v2/checkout/orders/#{order_id}")
   end
 
   @doc """
@@ -114,7 +114,7 @@ defmodule PayPal.PaymentsV2.Orders do
   """
   @spec authorize(String.t, map) :: {:ok, map | :not_found | :no_content | nil} | {:error, :unauthorised | :bad_network | any}
   def authorize(payment_id, params) do
-    PayPal.API.post("checkout/orders/#{payment_id}/authorize", params)
+    PayPal.API.post("v2/checkout/orders/#{payment_id}/authorize", params)
   end
 
   @doc """
@@ -140,7 +140,7 @@ defmodule PayPal.PaymentsV2.Orders do
   """
   @spec capture(String.t, map) :: {:ok, map | :not_found | :no_content} | {:error, :unauthorised | :bad_network | any}
   def capture(order_id, params) do
-    PayPal.API.post("checkout/orders/#{order_id}/capture", params)
+    PayPal.API.post("v2/checkout/orders/#{order_id}/capture", params)
   end
 
 end

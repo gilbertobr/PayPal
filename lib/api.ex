@@ -2,9 +2,8 @@ defmodule PayPal.API do
   @moduledoc """
   Documentation for PayPal.API. This module is about the base HTTP functionality
   """
-  @version Application.get_env(:pay_pal, :version_api)
-  @base_url_sandbox "https://api.sandbox.paypal.com/#{@version}/"
-  @base_url_live "https://api.paypal.com/#{@version}/"
+  @base_url_sandbox "https://api.sandbox.paypal.com/"
+  @base_url_live "https://api.paypal.com/"
 
   @doc """
   Requests an OAuth token from PayPal, returns a tuple containing the token and seconds till expiry.
@@ -29,9 +28,11 @@ defmodule PayPal.API do
     options = [hackney: [basic_auth: {PayPal.Config.get.client_id, PayPal.Config.get.client_secret}]]
     form = {:form, [grant_type: "client_credentials"]}
 
-    case IO.inspect(HTTPoison.post(base_url() <> "oauth2/token", form, headers, options)) do
+    case IO.inspect(HTTPoison.post(base_url() "v1/" <> "oauth2/token", form, headers, options)) do
       {:ok, %{status_code: 401}} ->
         {:error, :unauthorised}
+      {:ok, %{status_code: 404}} ->
+        {:error, :not_found}        
       {:ok, %{status_code: 406}} ->
         {:error, :not_acceptable}
       {:ok, %{body: body, status_code: 200}} ->
@@ -63,7 +64,7 @@ defmodule PayPal.API do
   """
   @spec get(String.t) :: {:ok, map | :not_found | :no_content } | {:error, :unauthorised | :bad_network | any}
   def get(url) do
-    case HTTPoison.get(base_url() <> url, headers()) do
+    case HTTPoison.get(base_url() <> "v1/" <> url, headers()) do
       {:ok, %{status_code: 401}} ->
         {:error, :unauthorised}
       {:ok, %{body: body, status_code: 200}} ->
@@ -146,7 +147,7 @@ defmodule PayPal.API do
   @spec patch(String.t, map | list) :: {:ok, map | nil | :not_found | :no_content} | {:error, :unauthorised | :bad_network | any}
   def patch(url, data) do
     {:ok, data} = Poison.encode(data)
-    case HTTPoison.patch(base_url() <> url, data, headers()) do
+    case HTTPoison.patch(base_url() <> "v1/" <> url, data, headers()) do
       {:ok, %{status_code: 401}} ->
         {:error, :unauthorised}
       {:ok, %{status_code: 200}} ->
